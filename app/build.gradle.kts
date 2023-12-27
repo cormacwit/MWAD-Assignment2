@@ -1,6 +1,9 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    //id("com.google.devtools.ksp") version "1.8.21-1.0.11"
 }
 
 android {
@@ -67,4 +70,12 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    //Room
+    //implementation("androidx.room:room-runtime:${rootProject.extra["room_version"]}")
+    //ksp("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
+    //implementation("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
+    //implementation ("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
+
+
 }
+
