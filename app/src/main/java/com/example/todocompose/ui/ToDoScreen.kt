@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.todocompose.data.ToDoItem
+import kotlin.reflect.KFunction0
 
 
 @Composable
@@ -64,7 +65,7 @@ fun TodoItemRow(todo: ToDoItem, onTodoClick: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TodoInput(onAddTodo: (String) -> Unit) {
+fun TodoInput(onAddTodo: KFunction0<Unit>) {
     var task by remember { mutableStateOf("") }
 
     Row(
@@ -83,4 +84,8 @@ fun TodoInput(onAddTodo: (String) -> Unit) {
             Text("Add")
         }
     }
+}
+
+fun onAddTodo(task: String) {
+
 }
