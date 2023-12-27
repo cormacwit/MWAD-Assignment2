@@ -1,3 +1,9 @@
 package com.example.todocompose.data
 
-data class TodoItem(val id: Int, val task: String, val isCompleted: Boolean = false)
+import androidx.room.PrimaryKey
+
+data class ToDoItem(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    val task: String,
+    val isCompleted: Boolean = false)

@@ -23,7 +23,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.todocompose.data.TodoItem
+import com.example.todocompose.data.ToDoItem
 
 
 @Composable
@@ -41,7 +41,7 @@ fun TodoScreen(todoViewModel: TodoViewModel = viewModel(factory = TodoViewModel.
 }
 
 @Composable
-fun TodoList(todos: List<TodoItem>, onTodoClick: (TodoItem) -> Unit) {
+fun TodoList(todos: List<ToDoItem>, onTodoClick: (ToDoItem) -> Unit) {
     LazyColumn {
         items(todos) { todo ->
             TodoItemRow(todo = todo, onTodoClick = { onTodoClick(todo) })
@@ -50,7 +50,7 @@ fun TodoList(todos: List<TodoItem>, onTodoClick: (TodoItem) -> Unit) {
 }
 
 @Composable
-fun TodoItemRow(todo: TodoItem, onTodoClick: () -> Unit) {
+fun TodoItemRow(todo: ToDoItem, onTodoClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
