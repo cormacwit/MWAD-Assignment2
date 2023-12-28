@@ -18,9 +18,9 @@ interface ItemDao {
     @Delete
     suspend fun delete(item: ToDoItem)
 
-    @Query("SELECT * from items WHERE id = :id")
+    @Query("SELECT * from ToDoItems WHERE id = :id")
     fun getItem(id: Int): Flow<ToDoItem>
 
-    @Query("SELECT * from items ORDER BY task ASC")
+    @Query("SELECT * from ToDoItems ORDER BY task ASC")
     fun getAllItems(): Flow<List<ToDoItem>>
 }

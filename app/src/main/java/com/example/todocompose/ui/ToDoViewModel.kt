@@ -41,16 +41,6 @@ class TodoViewModel(private val repository: TodoRepository) : ViewModel() {
         }
     }
 
-    companion object {
-        val Factory: ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                val application = (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as ToDoApplication)
-                val todoRepository = application.container.todoRepository
-                TodoViewModel(repository = todoRepository)
-            }
-        }
-    }
-
     data class ToDoItemUiState(
         val itemDetails: ToDoItemDetails = ToDoItemDetails(),
         val isEntryValid: Boolean = false
@@ -89,12 +79,4 @@ class TodoViewModel(private val repository: TodoRepository) : ViewModel() {
         }
     }
 
-    // Removed repeated functions
-
-    // New function to save item with coroutine scope
-    suspend fun saveItemWithCoroutine() {
-        if (validateInput()) {
-            repository.insertItem(itemUiState.value.itemDetails.toToDoItem())
-        }
-    }
 }

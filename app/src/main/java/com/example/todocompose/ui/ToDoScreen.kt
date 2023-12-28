@@ -75,7 +75,7 @@ fun TodoScreen(todoViewModel: TodoViewModel = viewModel(factory = TodoViewModelF
         }
     }
 }
-
+//Chatgbt asked for generic factory code for UI for the Viewmodel as it was recommended for bug fixing
 class TodoViewModelFactory(private val repository: TodoRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
         if (modelClass.isAssignableFrom(TodoViewModel::class.java)) {
