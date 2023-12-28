@@ -8,11 +8,12 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.todocompose.ToDoApplication
 import com.example.todocompose.data.ToDoItem
 import com.example.todocompose.data.TodoRepository
+import kotlinx.coroutines.launch
 
 class TodoViewModel(private val repository: TodoRepository) : ViewModel() {
 
     val todos = mutableStateOf<List<ToDoItem>>(emptyList())
-    val itemUiState = mutableStateOf(ToDoItemUiState())
+    var itemUiState = mutableStateOf(ToDoItemUiState())
 
     init {
         refreshTodos()
@@ -61,41 +62,23 @@ class TodoViewModel(private val repository: TodoRepository) : ViewModel() {
         val isCompleted: Boolean = false
     )
 
-    /**
-     * Extension function to convert [ToDoItemDetails] to [ToDoItem].
-     */
     fun ToDoItemDetails.toToDoItem(): ToDoItem = ToDoItem(
         id = id,
         task = task,
         isCompleted = isCompleted
     )
 
-    /**
-     * Extension function to format the task.
-     */
-    fun ToDoItem.formattedTask(): String {
-        // You can add any formatting logic here if needed
-        return task
-    }
-
-    /**
-     * Extension function to convert [ToDoItem] to [ToDoItemUiState].
-     */
     fun ToDoItem.toToDoItemUiState(isEntryValid: Boolean = false): ToDoItemUiState = ToDoItemUiState(
         itemDetails = this.toToDoItemDetails(),
         isEntryValid = isEntryValid
     )
 
-    /**
-     * Extension function to convert [ToDoItem] to [ToDoItemDetails].
-     */
     fun ToDoItem.toToDoItemDetails(): ToDoItemDetails = ToDoItemDetails(
         id = id,
         task = task,
         isCompleted = isCompleted
     )
 
-    // New functions for handling UI state
     fun ToDoItemUiState.toToDoItem(): ToDoItem = itemDetails.toToDoItem()
 
     fun ToDoItemUiState.toToDoItemDetails(): ToDoItemDetails = itemDetails
@@ -105,7 +88,13 @@ class TodoViewModel(private val repository: TodoRepository) : ViewModel() {
             repository.insertItem(itemUiState.value.itemDetails.toToDoItem())
         }
     }
+
+    // Removed repeated functions
+
+    // New function to save item with coroutine scope
+    suspend fun saveItemWithCoroutine() {
+        if (validateInput()) {
+            repository.insertItem(itemUiState.value.itemDetails.toToDoItem())
+        }
+    }
 }
-
-
-
